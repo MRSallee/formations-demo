@@ -22,6 +22,7 @@ async function playVideoFromCamera() {
         videoElement.srcObject = stream;
         
         let body = document.querySelector('body');
+        scriptTiming();
         
         body.setAttribute('welcome', '1');
     } catch(error) {
@@ -111,7 +112,6 @@ function loadJquery() {
     scriptJquery.setAttribute('src', hostedJquery);
     scriptJquery.addEventListener('load', function() {
         scripting();
-        scriptTiming();
     });
     
     body.append(scriptJquery);
@@ -122,6 +122,7 @@ loadJquery();
 function scripting() {
     let body = document.querySelector('body'),
         logo = document.querySelector('div.logo'),
+        huddleButton = document.querySelector('button.join-huddle'),
         user4Video = document.querySelector('article.user[user-id="4"] video'),
         user5Video = document.querySelector('article.user[user-id="5"] video');
     
@@ -131,7 +132,8 @@ function scripting() {
             chatCount = body.getAttribute('chat-count'),
             screenshare = body.getAttribute('screenshare'),
             audioOne = document.querySelector('audio#audio-one'),
-            audioTwo = document.querySelector('audio#audio-two');
+            audioTwo = document.querySelector('audio#audio-two'),
+            audioThree = document.querySelector('audio#audio-three');
         
         // Initial greeting
         if ( burstCount === "0" ) {
@@ -139,6 +141,14 @@ function scripting() {
             audioOne.play();
             setTimeout(function() {
                 body.setAttribute('burst-count', '2');
+            }, 2000);
+            
+            setTimeout(function() {
+                let message = 'Eyyyy you made it!',
+                    user = 'Blimple';
+
+                addChatBubble(message, user);
+                body.setAttribute('chat-count', '1');
             }, 2000);
         }
         // Peace out to meeting
@@ -176,12 +186,12 @@ function scripting() {
             body.setAttribute('screenshare', '1');
         }
         // Chat response
-        else if ( chatCount === "0" ) {
+        else if ( chatCount === "1" ) {
             let message = 'Sorry, I probably won\'t be much help',
                 user = 'Boffsnof';
             
             addChatBubble(message, user);
-            body.setAttribute('chat-count', '1');
+            body.setAttribute('chat-count', '2');
         }
         // Add second user to huddle
         else if ( huddleCount === "1") {
@@ -202,6 +212,11 @@ function scripting() {
                     volume: 0.0
                 }, 2000);
             }, 8000);
+            
+            huddleButton.addEventListener('click', function() {
+                body.setAttribute('outro', '1');
+                audioThree.play();
+            });
         }
         // Reset
         else {
@@ -227,7 +242,7 @@ function scriptTiming() {
     
     setTimeout(function() {
         advanceButton.click();
-    }, 15000);
+    }, 25000);
 
     sparkle.addEventListener('click', function() {
         scriptsRun++;

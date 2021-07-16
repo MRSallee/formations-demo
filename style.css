@@ -32,6 +32,8 @@ formations.flights
 
 formations.team
 
+getinformations.com
+
 *****/
 
 /*****
@@ -56,6 +58,11 @@ html, body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 1em;
+}
+
+body {
+    overflow: hidden;
+    background-color: hsl(272, 25%, 85%);
 }
 
 main.page-frame {
@@ -102,7 +109,7 @@ div.logo {
     border-bottom: 1px solid rgba(0,0,0, 0.1);
     
     cursor: pointer;
-    filter: invert(1)
+    filter: invert(1);
 }
 
 div.logo {
@@ -517,7 +524,7 @@ div.message:after {
     
     border-radius: 24px;
     
-    background-color: magenta;
+    background-color: dimgray;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -529,6 +536,10 @@ div.message[user="you"]:after {
 
 div.message[user="Boffsnof"]:after {
     background-image: url('avatar_03.png');
+}
+
+div.message[user="Blimple"]:after {
+    background-image: url('avatar_05.jpeg');
 }
 
 
@@ -841,4 +852,43 @@ body[screenshare="1"] div.screen-share {
     padding: 0 24px 24px 24px;
     
     opacity: 1.0;
+}
+
+/*****
+Outro *****/
+
+body[outro="1"]:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    content: '';
+    width: 500px;
+    height: 200px;
+    margin: auto;
+    
+    background-image: url('logo.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    cursor: pointer;
+    filter: invert(1);
+}
+
+body[outro="1"] main.page-frame {
+    animation: outro ease-out 10s 1 forwards;
+}
+
+@keyframes outro {
+    0% {
+        transform: scale(1.0);
+        opacity: 1.0;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0.0;
+    }
 }
