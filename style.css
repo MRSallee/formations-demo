@@ -547,7 +547,7 @@ div.users {
 
 body[welcome="1"] div.users:after {
     position: absolute;
-    top: -36px;
+    top: -66px;
     right: 0;
     left: 0;
     z-index: 1;
@@ -576,7 +576,7 @@ body[welcome="1"] div.users:after {
 
 body[welcome="1"] div.users:before {
     position: absolute;
-    top: 0;
+    top: -30px;
     right: 0;
     left: 0;
     

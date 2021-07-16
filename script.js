@@ -224,15 +224,15 @@ function scriptTiming() {
     setTimeout(function() {
         advanceButton.click();
     }, 5000);
+    
+    setTimeout(function() {
+        advanceButton.click();
+    }, 15000);
 
     sparkle.addEventListener('click', function() {
         scriptsRun++;
         
         if (scriptsRun === 1) {
-            setTimeout(function() {
-                advanceButton.click();
-            }, 500);
-        } else if (scriptsRun === 2) {
             setTimeout(function() {
                 advanceButton.click();
             }, 500);
