@@ -111,7 +111,7 @@ function loadJquery() {
     scriptJquery.setAttribute('src', hostedJquery);
     scriptJquery.addEventListener('load', function() {
         scripting();
-        //scriptTiming();
+        scriptTiming();
     });
     
     body.append(scriptJquery);
@@ -129,18 +129,24 @@ function scripting() {
         let burstCount = body.getAttribute('burst-count'),
             huddleCount = body.getAttribute('huddle-count'),
             chatCount = body.getAttribute('chat-count'),
-            screenshare = body.getAttribute('screenshare');
+            screenshare = body.getAttribute('screenshare'),
+            audioOne = document.querySelector('audio#audio-one'),
+            audioTwo = document.querySelector('audio#audio-two');
         
+        // Initial greeting
         if ( burstCount === "0" ) {
             body.setAttribute('burst-count', '1');
+            audioOne.play();
             setTimeout(function() {
                 body.setAttribute('burst-count', '2');
             }, 2000);
         }
+        // Peace out to meeting
         else if ( burstCount === "2" ) {
             let firstUser = document.querySelector('div.user-row article.user:nth-child(1)');
             
             body.setAttribute('burst-count', '3');
+            audioTwo.play();
             
             setTimeout(function() {
                 body.setAttribute('burst-count', '4');
@@ -151,6 +157,7 @@ function scripting() {
                 firstUser.querySelector('div.activity-status').textContent = 'Meeting';
             }, 3000);
         }
+        // Add first user to huddle
         else if ( huddleCount === "0" ) {
             body.setAttribute('huddle-count', '1');
             user4Video.volume = 1.0;
@@ -164,9 +171,11 @@ function scripting() {
                 }, 2000);
             }, 8000);
         }
+        // Enable screen share
         else if ( screenshare === "0") {
             body.setAttribute('screenshare', '1');
         }
+        // Chat response
         else if ( chatCount === "0" ) {
             let message = 'Sorry, I probably won\'t be much help',
                 user = 'Boffsnof';
@@ -174,6 +183,7 @@ function scripting() {
             addChatBubble(message, user);
             body.setAttribute('chat-count', '1');
         }
+        // Add second user to huddle
         else if ( huddleCount === "1") {
             body.setAttribute('huddle-count', '2');
             user4Video.volume = 1.0;
@@ -193,6 +203,7 @@ function scripting() {
                 }, 2000);
             }, 8000);
         }
+        // Reset
         else {
             body.setAttribute('screenshare', '0');
             body.setAttribute('huddle-count', '0');
@@ -206,29 +217,61 @@ function scripting() {
 
 // Timing for scripting
 function scriptTiming() {
-    let advanceButton = document.querySelector('div.logo');
+    let advanceButton = document.querySelector('div.logo'),
+        sparkle = document.querySelector('div.formation.unread'),
+        scriptsRun = 0;
     
     setTimeout(function() {
         advanceButton.click();
-    }, 1000);
+    }, 5000);
+
+    sparkle.addEventListener('click', function() {
+        scriptsRun++;
+        
+        if (scriptsRun === 1) {
+            setTimeout(function() {
+                advanceButton.click();
+            }, 500);
+        } else if (scriptsRun === 2) {
+            setTimeout(function() {
+                advanceButton.click();
+            }, 500);
+
+            setTimeout(function() {
+                advanceButton.click();
+            }, 5000);
+
+            setTimeout(function() {
+                advanceButton.click();
+            }, 10000);
+
+            setTimeout(function() {
+                advanceButton.click();
+            }, 15000);
+        }
+    });
     
-    setTimeout(function() {
-        advanceButton.click();
-    }, 10000);
-    
-    setTimeout(function() {
-        advanceButton.click();
-    }, 20000);
-    
-    setTimeout(function() {
-        advanceButton.click();
-    }, 25000);
-    
-    setTimeout(function() {
-        advanceButton.click();
-    }, 30000);
-    
-    setTimeout(function() {
-        advanceButton.click();
-    }, 35000);
+//    setTimeout(function() {
+//        advanceButton.click();
+//    }, 1000);
+//    
+//    setTimeout(function() {
+//        advanceButton.click();
+//    }, 10000);
+//    
+//    setTimeout(function() {
+//        advanceButton.click();
+//    }, 20000);
+//    
+//    setTimeout(function() {
+//        advanceButton.click();
+//    }, 25000);
+//    
+//    setTimeout(function() {
+//        advanceButton.click();
+//    }, 30000);
+//    
+//    setTimeout(function() {
+//        advanceButton.click();
+//    }, 35000);
 }

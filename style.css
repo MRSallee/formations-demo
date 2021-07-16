@@ -101,6 +101,7 @@ div.logo {
     background-repeat: no-repeat;
     border-bottom: 1px solid rgba(0,0,0, 0.1);
     
+    cursor: pointer;
     filter: invert(1)
 }
 
@@ -162,7 +163,9 @@ div.formation {
     
     padding: 12px;
     border-top: 1px solid rgba(255,255,255, 0.1);
-    
+}
+
+div.formation:nth-child(5) {
     cursor: pointer;
 }
 
@@ -252,6 +255,8 @@ div.controls {
     align-items: center;
     
     flex: 96px 0 0;
+    
+    pointer-events: none;
 }
 
 button.join-huddle {
@@ -304,7 +309,6 @@ div.waveform {
     transition: opacity 0.1s ease-out;
     
     filter: grayscale(1);
-/*    mix-blend-mode: difference;*/
     pointer-events: none;
 }
 
